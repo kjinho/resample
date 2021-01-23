@@ -9,9 +9,13 @@ A utility to resample the images of a PDF to generate a new PDF.
   and save it in the location of your PDF files
 - OPTIONAL: For a system wide installation,
   - save the [standalone JAR release](https://github.com/kjinho/resample/releases) in an appropriate
-    directory (e.g., in UNIX-like systems, /usr/local/share/resample/), and
+    directory (e.g., in UNIX-like systems, /usr/local/share/resample/),
   - save the [optional startup ruby script](https://github.com/kjinho/resample/blob/master/bin/resample)
-    someplace in your $PATH (e.g., in UNIX-like systems, /usr/local/bin/).
+    someplace in your $PATH (e.g., in UNIX-like systems, /usr/local/bin/),
+  - modify the ruby script to reflect the correct locations of the java runtime and the
+    standalone JAR, and
+  - set the proper permissions for the ruby script, such as with the following command:
+    ```$ chmod 711 /usr/local/bin/resample```
 
 ## Usage
 
@@ -21,7 +25,7 @@ Calling the jar directly using a Java runtime:
     
 Calling the jar indirectly using an 
 [optional startup ruby script](https://github.com/kjinho/resample/blob/master/bin/resample) 
-to start java )
+to start java
 
     $ resample --input [INPUT_FILE] --output [OUTPUT_FILE] [options]
 
