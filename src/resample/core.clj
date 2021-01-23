@@ -5,7 +5,7 @@
   (:import org.apache.pdfbox.rendering.ImageType)
   (:gen-class))
 
-(def jar-name "resample-0.1.0-standalone.jar")
+(def jar-name "resample-0.1.1-standalone.jar")
 
 (def color-schemes
   {"BW"    ImageType/BINARY
@@ -33,15 +33,18 @@
                "Must be one of BW, GRAY, RGB, or ALPHA"]]
    ["-h" "--help"]])
 
+(defn print-help
+  [opts]
+  (println
+    (str
+      "resample: create a new PDF by resampling the input PDF\n"
+      "USAGE: java -jar " jar-name " --input [INPUT_FILE] --output [OUTPUT_FILE] [options]\n"
+      (-> opts :summary))))
 
 (defn -main [& args]
   (let [opts (clojure.tools.cli/parse-opts args cli-options)]
     (cond
-      (-> opts :options :help) (println
-                                 (str
-                                   "resample: create a new PDF by resampling the input PDF\n"
-                                   "USAGE: java -jar " jar-name " --input [INPUT_FILE] --output [OUTPUT_FILE] [options]\n"
-                                   (-> opts :summary)))
+      (-> opts :options :help) (print-help opts)
       (-> opts :errors) (do
                           (println "Command-line error:")
                           (dorun (map println (-> opts :errors))))
@@ -52,4 +55,4 @@
                 (-> opts :options :dpi)
                 (-> opts :options :color color-schemes)
                 {:level (-> opts :options :verbosity)})
-      :else (println opts))))
+      :else (print-help opts))))

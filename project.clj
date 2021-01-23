@@ -1,4 +1,4 @@
-(defproject resample "0.1.0"
+(defproject resample "0.1.1"
   :description "tool to resample PDF"
   :url "https://github.com/kjinho/resample"
   :license {:name "Apache License, Version 2.0"

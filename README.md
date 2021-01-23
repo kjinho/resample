@@ -4,11 +4,26 @@ A utility to resample the images of a PDF to generate a new PDF.
 
 ## Installation
 
-Download from https://github.com/kjinho/resample.
+- Install a java runtime environment, such as from [AdoptOpenJDK](https://adoptopenjdk.net/).
+- Download a [standalone JAR release](https://github.com/kjinho/resample/releases) of ```resample```
+  and save it in the location of your PDF files
+- OPTIONAL: For a system wide installation,
+  - save the [standalone JAR release](https://github.com/kjinho/resample/releases) in an appropriate
+    directory (e.g., in UNIX-like systems, /usr/local/share/resample/), and
+  - save the [optional startup ruby script](https://github.com/kjinho/resample/blob/master/bin/resample)
+    someplace in your $PATH (e.g., in UNIX-like systems, /usr/local/bin/).
 
 ## Usage
 
+Calling the jar directly using a Java runtime:
+
     $ java -jar resample-0.1.0-standalone.jar --input [INPUT_FILE] --output [OUTPUT_FILE] [options]
+    
+Calling the jar indirectly using an 
+[optional startup ruby script](https://github.com/kjinho/resample/blob/master/bin/resample) 
+to start java )
+
+    $ resample --input [INPUT_FILE] --output [OUTPUT_FILE] [options]
 
 ## Options
 
