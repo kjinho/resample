@@ -13,3 +13,9 @@ pom.xml.asc
 .hg/
 /.idea
 resample.iml
+/.clj-kondo/cache/
+/.clj-kondo/.cache/
+/.lsp/sqlite.*.db
+/.calva/
+.DS_Store
+*.pdf

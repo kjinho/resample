@@ -7,7 +7,7 @@
 
 (defn stringify
   [int]
-  (format "% 3d%%" int))
+  (format "%3d%%" int))
 
 (defn log
   "logs the current progress"
