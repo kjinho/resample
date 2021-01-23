@@ -6,9 +6,9 @@
   (:gen-class))
 
 (def color-schemes
-  {"BW" ImageType/BINARY
-   "GRAY" ImageType/GRAY
-   "RGB" ImageType/RGB
+  {"BW"    ImageType/BINARY
+   "GRAY"  ImageType/GRAY
+   "RGB"   ImageType/RGB
    "ALPHA" ImageType/ARGB})
 
 (def cli-options
@@ -21,6 +21,10 @@
     :default 200
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 % 0x10000) "Must be a number between 0 and 65536"]]
+   ["-v" nil "Verbosity level"
+    :id :verbosity
+    :default 0
+    :update-fn inc]
    ["-c" "--color TYPE" "the color type [BW|GRAY|RGB|ALPHA]"
     :default "BW"
     :validate [#(not (nil? (get color-schemes %)))
@@ -46,5 +50,6 @@
       (resample (-> opts :options :input)
                 (-> opts :options :output)
                 (-> opts :options :dpi)
-                (-> opts :options :color color-schemes))
+                (-> opts :options :color color-schemes)
+                {:level (-> opts :options :verbosity)})
       :else (println opts))))

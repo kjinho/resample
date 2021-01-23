@@ -1,4 +1,6 @@
+;; adapted from pdfboxing
 (ns resample.merge
+  (:require [resample.logging])
   (:import (org.apache.pdfbox.pdmodel PDDocument
                                       PDPage
                                       PDPageContentStream)
@@ -7,7 +9,7 @@
 
 (defn- add-image-to-page
   "Adds image as a page to the document object"
-  [doc ^PDImageXObject image]
+  [doc ^PDImageXObject image logging]
   (let [page-size PDRectangle/LETTER
         original-width (.getWidth image)
         original-height (.getHeight image)
@@ -21,12 +23,20 @@
         page (PDPage. page-size)]
     (.addPage doc page)
     (with-open [stream (PDPageContentStream. ^PDDocument doc ^PDPage page)]
-      (.drawImage stream image x y scaled-width scaled-height))))
+      (.drawImage stream image x y scaled-width scaled-height)
+      (resample.logging/log
+        (-> (assoc logging
+              :message (str "addition of " (.toString ^PDImageXObject image) " complete"))
+            (update :current inc))))))
 
 (defn merge-images-from-path
   "Merges images provided as a vector of string paths"
-  [images output-doc]
+  [images output-doc logging]
   (with-open [doc (PDDocument.)]
-    (run! #(add-image-to-page doc (PDImageXObject/createFromFile % doc))
-          images)
+    (run! #(add-image-to-page
+             doc
+             (PDImageXObject/createFromFile (second %) doc)
+             (assoc logging
+               :current (first %)))
+          (map vector (range (:current logging) (:total logging)) images))
     (.save doc ^String output-doc)))

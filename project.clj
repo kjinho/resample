@@ -10,7 +10,8 @@
                  [com.github.jai-imageio/jai-imageio-core "1.4.0"]
                  [com.github.jai-imageio/jai-imageio-jpeg2000 "1.4.0"]
                  [org.apache.pdfbox/jbig2-imageio "3.0.3"]
-                 [org.clojure/tools.cli "1.0.194"]]
+                 [org.clojure/tools.cli "1.0.194"]
+                 [org.clojure/tools.logging "1.1.0"]]
   :main ^:skip-aot resample.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot      :all
