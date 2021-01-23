@@ -5,6 +5,8 @@
   (:import org.apache.pdfbox.rendering.ImageType)
   (:gen-class))
 
+(def jar-name "resample-0.1.0-standalone.jar")
+
 (def color-schemes
   {"BW"    ImageType/BINARY
    "GRAY"  ImageType/GRAY
@@ -21,7 +23,7 @@
     :default 200
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 0 % 0x10000) "Must be a number between 0 and 65536"]]
-   ["-v" nil "Verbosity level"
+   ["-v" nil "verbosity level (display progress)"
     :id :verbosity
     :default 0
     :update-fn inc]
@@ -32,15 +34,13 @@
    ["-h" "--help"]])
 
 
-
-
 (defn -main [& args]
   (let [opts (clojure.tools.cli/parse-opts args cli-options)]
     (cond
       (-> opts :options :help) (println
                                  (str
                                    "resample: create a new PDF by resampling the input PDF\n"
-                                   "USAGE: resample --input [FILE] --output [FILE] [--dpi 200]\n"
+                                   "USAGE: java -jar " jar-name " --input [INPUT_FILE] --output [OUTPUT_FILE] [options]\n"
                                    (-> opts :summary)))
       (-> opts :errors) (do
                           (println "Command-line error:")

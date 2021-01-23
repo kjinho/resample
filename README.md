@@ -15,6 +15,7 @@ Download from https://github.com/kjinho/resample.
     -i, --input INPUT_FILE         input file name
     -o, --output OUTPUT_FILE       output file name
     -d, --dpi NUMBER          200  DPI
+    -v                             verbosity level (display progress)
     -c, --color TYPE          BW   the color type [BW|GRAY|RGB|ALPHA]
     -h, --help
 
