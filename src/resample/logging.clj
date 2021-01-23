@@ -12,13 +12,12 @@
 (defn log
   "logs the current progress"
   [progress]
-  (case (:level progress)
-    1 (case (:total progress)
-        nil (println (:message progress))
-        0 (println (:message progress))
-        (-> (format "[%s] %s"
-                    (stringify (percentage-string (:current progress)
-                                                  (:total progress)))
-                    (:message progress))
-            (println)))
-    nil))
+  (when (>= (get progress :level 0) 1)
+    (case (:total progress)
+      nil (println (:message progress))
+      0 (println (:message progress))
+      (-> (format "[%s] %s"
+                  (stringify (percentage-string (:current progress)
+                                                (:total progress)))
+                  (:message progress))
+          (println)))))
