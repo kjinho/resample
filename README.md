@@ -21,7 +21,7 @@ A utility to resample the images of a PDF to generate a new PDF.
 
 Calling the jar directly using a Java runtime:
 
-    $ java -jar resample-0.1.0-standalone.jar --input [INPUT_FILE] --output [OUTPUT_FILE] [options]
+    $ java -jar resample-0.1.1-standalone.jar --input [INPUT_FILE] --output [OUTPUT_FILE] [options]
     
 Calling the jar indirectly using an 
 [optional startup ruby script](https://github.com/kjinho/resample/blob/master/bin/resample) 
